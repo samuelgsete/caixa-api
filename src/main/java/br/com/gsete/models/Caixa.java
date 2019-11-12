@@ -18,7 +18,7 @@ public class Caixa extends EntidadeBase {
     @JsonProperty(value = "nome", required = true)
     public String nome;
 
-    @Column(name = "saldo", nullable = false, unique = false)
+    @Column(name = "saldo", nullable = true, unique = false)
     @JsonProperty(value = "saldo", required = false)
     public Double saldo;
 
