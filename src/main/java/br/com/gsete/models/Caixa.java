@@ -1,11 +1,16 @@
 package br.com.gsete.models;
 
+import java.util.HashSet;
+import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
@@ -16,16 +21,21 @@ public class Caixa extends EntidadeBase {
     @NotNull(message = "{caixa.nome.notNull}")
     @Size(min = 3, max = 50, message = "{caixa.nome.size}")
     @JsonProperty(value = "nome", required = true)
-    public String nome;
+    private String nome;
 
     @Column(name = "saldo", nullable = true, unique = false)
     @JsonProperty(value = "saldo", required = false)
-    public Double saldo;
+    private Double saldo;
+
+    @OneToMany(fetch= FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "caixa_id")
+	@JsonProperty(value = "entradas", required = false)
+    private Set<Entrada> entradas = new HashSet<Entrada>();
 
     @Column(name="observacoes", nullable = true, unique = false)
     @Size(min = 3, max = 200, message = "{caixa.observacoes.size}")
     @JsonProperty(value = "observacoes", required = true)
-    public String observacoes;
+    private String observacoes;
 
     public Caixa() {}
 
