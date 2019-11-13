@@ -33,6 +33,16 @@ public class RecursoCaixa {
                 .build();
     }
 
+    @GET
+    @Path("/{id}")
+    @Produces("application/json")
+    public Response getCaixa(@PathParam("id") Long id) {
+        return Response
+                .ok()
+                .entity(servico.buscarPorId(id))
+                .build();
+    }
+
     @POST
 	@Consumes("application/json")
     public Response salvarCaixa(Caixa caixa) throws ObjetcBadFormattedException {
