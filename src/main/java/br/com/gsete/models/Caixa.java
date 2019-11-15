@@ -85,6 +85,14 @@ public class Caixa extends EntidadeBase {
         return this;
     }
 
+    public void atualizarSaldo() {
+        Double saldoAtualizdo = 0.0;
+        for (Entrada entrada : entradas) {
+            saldoAtualizdo += entrada.getValor();
+        }
+        saldo = saldoAtualizdo;
+    }
+
     @Override
     public String toString() {
         return "{" +

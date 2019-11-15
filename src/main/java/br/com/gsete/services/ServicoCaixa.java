@@ -27,6 +27,7 @@ public class ServicoCaixa {
     @Transactional
     public void salvarOuAtualizar(Caixa caixa) throws ObjetcBadFormattedException {
         if(caixa != null) {
+            caixa.atualizarSaldo();
             repositorio.save(caixa);
         }else {
             throw new ObjetcBadFormattedException("Objeto está nulo ou mal formatado");
