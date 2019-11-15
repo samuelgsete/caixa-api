@@ -3,6 +3,8 @@ package br.com.gsete.models;
 import java.util.Date;
 
 import javax.persistence.Column;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -31,13 +33,21 @@ public abstract class Movimentacao extends EntidadeBase {
     @JsonProperty(value = "valor", required = true)
     private Double valor;
 
-    public Movimentacao() { }
+    @Column(name="tipo_movimentacao", nullable = false, unique = false)
+    @NotNull(message = "{movimentacao.tipo.notNull}")
+    @Enumerated(EnumType.STRING)
+    @JsonProperty(value = "tipo", required = true)
+    private TipoMovimentacao tipo;
 
 
-    public Movimentacao(String descricao, Date data, Double valor) {
+    public Movimentacao() {
+    }
+
+    public Movimentacao(String descricao, Date data, Double valor, TipoMovimentacao tipo) {
         this.descricao = descricao;
         this.data = data;
         this.valor = valor;
+        this.tipo = tipo;
     }
 
     public String getDescricao() {
@@ -64,6 +74,14 @@ public abstract class Movimentacao extends EntidadeBase {
         this.valor = valor;
     }
 
+    public TipoMovimentacao getTipo() {
+        return this.tipo;
+    }
+
+    public void setTipo(TipoMovimentacao tipo) {
+        this.tipo = tipo;
+    }
+
     public Movimentacao descricao(String descricao) {
         this.descricao = descricao;
         return this;
@@ -79,12 +97,18 @@ public abstract class Movimentacao extends EntidadeBase {
         return this;
     }
 
+    public Movimentacao tipo(TipoMovimentacao tipo) {
+        this.tipo = tipo;
+        return this;
+    }
+
     @Override
     public String toString() {
         return "{" +
             " descricao='" + getDescricao() + "'" +
             ", data='" + getData() + "'" +
             ", valor='" + getValor() + "'" +
+            ", tipo='" + getTipo() + "'" +
             "}";
-    }
+    }    
 }

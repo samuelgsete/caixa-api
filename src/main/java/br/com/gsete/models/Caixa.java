@@ -32,6 +32,11 @@ public class Caixa extends EntidadeBase {
 	@JsonProperty(value = "entradas", required = false)
     private Set<Entrada> entradas = new HashSet<Entrada>();
 
+    @OneToMany(fetch= FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "caixa_id")
+	@JsonProperty(value = "saidas", required = false)
+    private Set<Saida> saidas = new HashSet<Saida>();
+
     @Column(name="observacoes", nullable = true, unique = false)
     @Size(min = 3, max = 200, message = "{caixa.observacoes.size}")
     @JsonProperty(value = "observacoes", required = true)
@@ -86,11 +91,14 @@ public class Caixa extends EntidadeBase {
     }
 
     public void atualizarSaldo() {
-        Double saldoAtualizdo = 0.0;
+        Double saldoAtualizado = 0.0;
         for (Entrada entrada : entradas) {
-            saldoAtualizdo += entrada.getValor();
+            saldoAtualizado += entrada.getValor();
         }
-        saldo = saldoAtualizdo;
+        for (Saida saida : saidas) {
+            saldoAtualizado -= saida.getValor();
+        }
+        saldo = saldoAtualizado;
     }
 
     @Override
