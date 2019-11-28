@@ -20,24 +20,24 @@ public abstract class Movimentacao extends EntidadeBase {
     @NotNull(message = "{movimentacao.descricao.notNull}")
     @Size(min = 3, max = 50, message = "{movimentacao.descricao.size}")
     @JsonProperty(value = "descricao", required = true)
-    private String descricao;
+    protected String descricao;
 
     @Column(name="data", nullable = false, unique = false)
     @Temporal(TemporalType.DATE)
     @NotNull(message = "{movimentacao.data.notNull}")
     @JsonProperty(value = "data", required = true)
-    private Date data;
+    protected Date data;
 
     @Column(name="valor", nullable = false, unique = false)
     @NotNull(message = "{movimentacao.valor.notNull}")
     @JsonProperty(value = "valor", required = true)
-    private Double valor;
+    protected Double valor;
 
     @Column(name="tipo_movimentacao", nullable = false, unique = false)
     @NotNull(message = "{movimentacao.tipo.notNull}")
     @Enumerated(EnumType.STRING)
     @JsonProperty(value = "tipo", required = true)
-    private TipoMovimentacao tipo;
+    protected TipoMovimentacao tipo;
 
 
     public Movimentacao() {

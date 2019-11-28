@@ -93,6 +93,7 @@ public class Caixa extends EntidadeBase {
     public void atualizarSaldo() {
         Double saldoAtualizado = 0.0;
         for (Entrada entrada : entradas) {
+            entrada.atualizarEntrada();
             saldoAtualizado += entrada.getValor();
         }
         for (Saida saida : saidas) {

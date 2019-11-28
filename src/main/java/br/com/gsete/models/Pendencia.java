@@ -31,7 +31,62 @@ public class Pendencia extends EntidadeBase {
     @JsonProperty(value = "situacao", required = true)
     private StatusPendencia situacao;
 
-    public Pendencia() {
 
+    public Pendencia() {
     }
+
+    public Pendencia(String titular, Double valor, StatusPendencia situacao) {
+        this.titular = titular;
+        this.valor = valor;
+        this.situacao = situacao;
+    }
+
+    public String getTitular() {
+        return this.titular;
+    }
+
+    public void setTitular(String titular) {
+        this.titular = titular;
+    }
+
+    public Double getValor() {
+        return this.valor;
+    }
+
+    public void setValor(Double valor) {
+        this.valor = valor;
+    }
+
+    public StatusPendencia getSituacao() {
+        return this.situacao;
+    }
+
+    public void setSituacao(StatusPendencia situacao) {
+        this.situacao = situacao;
+    }
+
+    public Pendencia titular(String titular) {
+        this.titular = titular;
+        return this;
+    }
+
+    public Pendencia valor(Double valor) {
+        this.valor = valor;
+        return this;
+    }
+
+    public Pendencia situacao(StatusPendencia situacao) {
+        this.situacao = situacao;
+        return this;
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+            " titular='" + getTitular() + "'" +
+            ", valor='" + getValor() + "'" +
+            ", situacao='" + getSituacao() + "'" +
+            "}";
+    }
+    
 }
